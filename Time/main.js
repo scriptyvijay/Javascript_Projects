@@ -1,23 +1,29 @@
-let date = new Date();
-let h = date.getHours();
-let m = date.getMinutes();
-let s = date.getSeconds();
-let session = "AM";
+function timeNow() {
+	let date = new Date();
+	let h = date.getHours();
+	let m = date.getMinutes();
+	let s = date.getSeconds();
+	let session = "AM";
 
-if (h > 12) {
-	h = h - 12;
-	session = "PM";
+	if (h == 0) {
+		h = 12;
+	}
+
+	if (h > 12) {
+		h = h - 12;
+		session = "PM";
+	}
+
+	h = h < 10 ? "0" + h : h;
+	m = m < 10 ? "0" + m : m;
+	s = s < 10 ? "0" + s : s;
+
+	let divTime = document.getElementById("time");
+	let fullTime = h + " " + ": " + m + " " + ": " + s + " " + session;
+	divTime.innerText = fullTime;
+	divTime.textContent = fullTime;
+
+	setTimeout(timeNow, 1000);
 }
 
-if (h == 12) {
-	h = 12;
-	Selection = "PM";
-}
-
-if (m < 9) {
-	m = "0" + m;
-}
-
-let divTime = document.getElementById("time");
-let fullTime = h + " " + ":" + m + " " + ":" + s + session;
-divTime.textContent = fullTime;
+timeNow();
